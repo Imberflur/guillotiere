@@ -1241,7 +1241,10 @@ impl SimpleAtlasAllocator {
             self.add_free_rect(&leftover_rect);
         }
 
-        return None;
+        result.map(|chosen_rect| Rectangle {
+            min: chosen_rect.min,
+            max: chosen_rect.min + requested_size.to_vector(),
+        })
     }
 
     /// Resize the atlas without changing the allocations.
